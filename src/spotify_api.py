@@ -5,20 +5,19 @@ import settings
 
 from spotipy.oauth2 import SpotifyClientCredentials
 
-def spotify_connection():
-    spotify = util.prompt_for_user_token(username=settings.username,
+sp = spotipy.Spotify()
+
+client_credentials_manager = SpotifyClientCredentials(client_id=settings.SPOTIPY_CLIENT_ID, client_secret=settings.SPOTIPY_CLIENT_SECRET,)
+
+def main():
+    spotify_connection = util.prompt_for_user_token(username=settings.username,
                                             scope=settings.scope,
                                             client_id=settings.SPOTIPY_CLIENT_ID,
                                             client_secret=settings.SPOTIPY_CLIENT_SECRET,
                                             redirect_uri=settings.redirect_uri)
-
-spotify_connection()
-'''
-while results['next']:
-    results = spotify.next(results)
-    albums.extend(results['items'])
-
-for album in albums:
-    print(album['name'])
-'''
-
+    
+    token = client_credentials_manager.get_access_token()
+    spotify_token = spotipy.Spotify(auth=token)
+       
+if __name__ == '__main__':
+   main()
