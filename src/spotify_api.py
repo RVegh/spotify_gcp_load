@@ -18,6 +18,7 @@ def main():
     
     token = client_credentials_manager.get_access_token()
     spotify_token = spotipy.Spotify(auth=token)
+
        
 if __name__ == '__main__':
    main()
